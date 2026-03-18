@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fahrenheit ↔ Celsius Rechner</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #1a1a2e;
+      color: #eee;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      background: #16213e;
+      border-radius: 16px;
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 1.6rem;
+      margin-bottom: 2rem;
+      color: #e94560;
+    }
+
+    .input-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.4rem;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 2px solid #0f3460;
+      border-radius: 8px;
+      background: #0f3460;
+      color: #eee;
+      font-size: 1.2rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input[type="number"]:focus {
+      border-color: #e94560;
+    }
+
+    .divider {
+      text-align: center;
+      font-size: 1.5rem;
+      margin: 1rem 0;
+      color: #e94560;
+    }
+
+    .result {
+      text-align: center;
+      font-size: 1rem;
+      color: #aaa;
+      margin-top: 1.5rem;
+      min-height: 1.5rem;
+    }
+
+    .result span {
+      color: #e94560;
+      font-weight: bold;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    button {
+      flex: 1;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-convert {
+      background: #e94560;
+      color: #fff;
+    }
+
+    .btn-convert:hover {
+      background: #c73652;
+    }
+
+    .btn-reset {
+      background: #0f3460;
+      color: #eee;
+    }
+
+    .btn-reset:hover {
+      background: #1a4a80;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>°F ↔ °C Rechner</h1>
+
+    <div class="input-group">
+      <label for="fahrenheit">Fahrenheit (°F)</label>
+      <input type="number" id="fahrenheit" placeholder="z.B. 98.6" oninput="convertFtoC()" />
+    </div>
+
+    <div class="divider">⇅</div>
+
+    <div class="input-group">
+      <label for="celsius">Celsius (°C)</label>
+      <input type="number" id="celsius" placeholder="z.B. 37" oninput="convertCtoF()" />
+    </div>
+
+    <div class="btn-group">
+      <button class="btn-reset" onclick="reset()">Zurücksetzen</button>
+    </div>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function convertFtoC() {
+      const f = parseFloat(document.getElementById('fahrenheit').value);
+      const celsiusInput = document.getElementById('celsius');
+      const result = document.getElementById('result');
+      if (isNaN(f)) {
+        celsiusInput.value = '';
+        result.innerHTML = '';
+        return;
+      }
+      const c = (f - 32) * 5 / 9;
+      celsiusInput.value = round(c);
+      result.innerHTML = `<span>${f} °F</span> entspricht <span>${round(c)} °C</span>`;
+    }
+
+    function convertCtoF() {
+      const c = parseFloat(document.getElementById('celsius').value);
+      const fahrenheitInput = document.getElementById('fahrenheit');
+      const result = document.getElementById('result');
+      if (isNaN(c)) {
+        fahrenheitInput.value = '';
+        result.innerHTML = '';
+        return;
+      }
+      const f = c * 9 / 5 + 32;
+      fahrenheitInput.value = round(f);
+      result.innerHTML = `<span>${c} °C</span> entspricht <span>${round(f)} °F</span>`;
+    }
+
+    function round(val) {
+      return Math.round(val * 100) / 100;
+    }
+
+    function reset() {
+      document.getElementById('fahrenheit').value = '';
+      document.getElementById('celsius').value = '';
+      document.getElementById('result').innerHTML = '';
+    }
+  </script>
+</body>
+</html>

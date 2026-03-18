@@ -1,0 +1,12 @@
+{
+  "name": "fahrenheit-celsius-rechner",
+  "version": "1.0.0",
+  "description": "Fahrenheit-Celsius-Rechner als Web-App",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

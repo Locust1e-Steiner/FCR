@@ -11,7 +11,7 @@ env:
   REGISTRY: ghcr.io
 
 jobs:
-    build-fcr:
+  build-fcr:
     name: Fahrenheit-Celsius-Rechner
     runs-on: ubuntu-latest
     permissions:
